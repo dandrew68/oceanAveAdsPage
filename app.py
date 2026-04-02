@@ -19,9 +19,13 @@ def _image_sources() -> list[str]:
     if not photos_dir.exists():
         return []
     allowed = {".png", ".jpg", ".jpeg", ".webp", ".svg"}
+    floorplan_names = {"floorplan.png", "floorplan.jpg", "floorplan.jpeg", "floorplan.webp", "floorplan.svg"}
     images = [
         file
-        for file in sorted(photos_dir.iterdir())
+        for file in sorted(
+            photos_dir.iterdir(),
+            key=lambda file: (file.name.lower() in floorplan_names, file.name.lower()),
+        )
         if file.is_file() and file.suffix.lower() in allowed
     ]
     return [f"/photos/{file.name}" for file in images]
@@ -61,6 +65,7 @@ app.layout = html.Div(
                                 html.Li("Miele dishwasher and oven"),
                                 html.Li("Main bathroom with a bath, separate W.C."),
                                 html.Li("Scramble parking (subject to House Rules)"),
+                                html.Li("200m walk to Double Bay village"),
                                 html.Li("Stroll to the beach and Double Bay Public School"),
                                 html.Li("600m to the ferry or Edgecliff station"),
                             ],
@@ -172,6 +177,20 @@ app.layout = html.Div(
                             children=[
                                 html.Span("2", className="stat-number"),
                                 html.Span("Bathrooms", className="stat-label"),
+                            ],
+                        ),
+                    ],
+                ),
+                html.Div(
+                    className="stat",
+                    children=[
+                        html.Img(src="/assets/icons/car.svg", alt="Car parking", className="stat-icon"),
+                        html.Div(
+                            className="stat-copy",
+                            children=[
+                                html.Span("1", className="stat-number"),
+                                html.Span("Car park", className="stat-label"),
+                                html.Span("Scramble parking", className="stat-note"),
                             ],
                         ),
                     ],

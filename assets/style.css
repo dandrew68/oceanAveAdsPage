@@ -264,6 +264,12 @@ body {
   letter-spacing: 0.08em;
 }
 
+.stat-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.2;
+}
+
 .stat-text {
   font-size: 1.1rem;
   font-weight: 600;
