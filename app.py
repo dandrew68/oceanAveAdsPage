@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from dash import Dash, html
-from flask import send_from_directory
+from flask import render_template_string, send_from_directory
 
 
 GOOGLE_TAG_ID = "G-N3E492LY10"
@@ -37,6 +37,47 @@ app.index_string = f"""
 """
 server = app.server
 photos_dir = Path(__file__).resolve().parent / "photos"
+
+
+def _static_page(title: str, heading: str, paragraphs: list[str]) -> str:
+    return render_template_string(
+        """
+        <!DOCTYPE html>
+        <html lang="en">
+            <head>
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <title>{{ title }}</title>
+                <link rel="stylesheet" href="/assets/style.css" />
+                <script async src="https://www.googletagmanager.com/gtag/js?id={{ tag_id }}"></script>
+                <script>
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '{{ tag_id }}');
+                </script>
+            </head>
+            <body>
+                <main class="page policy-page">
+                    <div class="policy-card">
+                        <div class="pill">Ocean Avenue Double Bay</div>
+                        <h1>{{ heading }}</h1>
+                        {% for paragraph in paragraphs %}
+                        <p class="footer-copy">{{ paragraph }}</p>
+                        {% endfor %}
+                        <div class="policy-nav">
+                            <a class="footer-link" href="/">Back to property page</a>
+                        </div>
+                    </div>
+                </main>
+            </body>
+        </html>
+        """,
+        title=title,
+        heading=heading,
+        paragraphs=paragraphs,
+        tag_id=GOOGLE_TAG_ID,
+    )
 
 
 def _listing_button(label: str, href: str, class_name: str, element_id: str, analytics_event: str) -> html.A:
@@ -73,6 +114,34 @@ image_sources = _image_sources()
 @server.route("/photos/<path:filename>")
 def serve_photo(filename: str):
     return send_from_directory(photos_dir, filename)
+
+
+@server.route("/owner-contact")
+def owner_contact_page():
+    return _static_page(
+        "Owner & Contact | Ocean Avenue Double Bay",
+        "Owner & Contact",
+        [
+            "This website is operated by Auction Crowd Pty Ltd in connection with the marketing of 3/43 Ocean Avenue, Double Bay.",
+            "General and privacy enquiries can be sent to auctioncrowd@gmail.com.",
+            "This website is an informational property page that links through to the official listings on realestate.com.au and domain.com.au.",
+        ],
+    )
+
+
+@server.route("/privacy-policy")
+def privacy_policy_page():
+    return _static_page(
+        "Privacy Policy | Ocean Avenue Double Bay",
+        "Privacy Policy",
+        [
+            "This site uses Google Analytics and Google Ads measurement tools to understand page visits, engagement and clicks through to the official realestate.com.au and domain.com.au listings.",
+            "Those services may collect technical information such as your browser, device, IP address, approximate location, referring page, pages viewed and time on site. We use that information to understand campaign performance and improve this property page.",
+            "This site does not include a contact form or direct checkout. If you email us, we will use your details only to respond to your enquiry. We do not sell personal information.",
+            "If you click through to a third-party site such as realestate.com.au or domain.com.au, their own privacy policies and terms will apply to your use of those services.",
+            "If you have a privacy question or request, contact auctioncrowd@gmail.com.",
+        ],
+    )
 
 app.layout = html.Div(
     className="page",
@@ -247,52 +316,10 @@ app.layout = html.Div(
             ],
         ),
         html.Div(
-            className="footer",
+            className="legal-links",
             children=[
-                html.Div(
-                    className="footer-card",
-                    children=[
-                        html.H2("Owner & Contact"),
-                        html.P(
-                            "This website is operated by Auction Crowd Pty Ltd in connection with the marketing of "
-                            "3/43 Ocean Avenue, Double Bay.",
-                            className="footer-copy",
-                        ),
-                        html.P(
-                            [
-                                "General and privacy enquiries: ",
-                                html.A(
-                                    "auctioncrowd@gmail.com",
-                                    href="mailto:auctioncrowd@gmail.com",
-                                    className="footer-link",
-                                ),
-                            ],
-                            className="footer-copy",
-                        ),
-                    ],
-                ),
-                html.Div(
-                    className="footer-card",
-                    children=[
-                        html.H2("Privacy Policy"),
-                        html.P(
-                            "This site uses Google Analytics and Google Ads measurement tools to understand page visits, "
-                            "engagement and clicks through to the official realestate.com.au and domain.com.au listings.",
-                            className="footer-copy",
-                        ),
-                        html.P(
-                            "Those services may collect technical information such as your browser, device, IP address, "
-                            "approximate location, referring page, pages viewed and time on site. We use that information "
-                            "to understand campaign performance and improve this property page.",
-                            className="footer-copy",
-                        ),
-                        html.P(
-                            "This site does not include a contact form or direct checkout. If you email us, we will use "
-                            "your details only to respond to your enquiry. We do not sell personal information.",
-                            className="footer-copy",
-                        ),
-                    ],
-                ),
+                html.A("Owner & Contact", href="/owner-contact", className="legal-link"),
+                html.A("Privacy Policy", href="/privacy-policy", className="legal-link"),
             ],
         ),
     ],

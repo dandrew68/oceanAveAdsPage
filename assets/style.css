@@ -234,6 +234,51 @@ body {
   text-decoration: underline;
 }
 
+.legal-links {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.legal-link {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.legal-link:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.policy-page {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.policy-card {
+  width: min(760px, 100%);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.policy-card h1 {
+  font-family: "Fraunces", serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  margin: 14px 0 18px;
+  letter-spacing: -0.02em;
+}
+
+.policy-nav {
+  margin-top: 18px;
+}
+
 .stats-banner {
   margin-top: 56px;
   display: grid;
@@ -301,6 +346,10 @@ body {
 @media (max-width: 720px) {
   .page {
     padding: 48px 6vw 64px;
+  }
+
+  .policy-card {
+    padding: 22px;
   }
 
   .carousel-controls {
