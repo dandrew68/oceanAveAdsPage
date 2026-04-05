@@ -39,8 +39,16 @@ server = app.server
 photos_dir = Path(__file__).resolve().parent / "photos"
 
 
-def _listing_button(label: str, href: str, class_name: str) -> html.A:
-    return html.A(label, href=href, target="_blank", rel="noopener", className=class_name)
+def _listing_button(label: str, href: str, class_name: str, element_id: str, analytics_event: str) -> html.A:
+    return html.A(
+        label,
+        href=href,
+        target="_blank",
+        rel="noopener",
+        className=class_name,
+        id=element_id,
+        **{"data-analytics-event": analytics_event},
+    )
 
 
 def _image_sources() -> list[str]:
@@ -105,11 +113,15 @@ app.layout = html.Div(
                                     "View on realestate.com.au",
                                     "https://www.realestate.com.au/property-apartment-nsw-double+bay-150764056",
                                     "cta rea",
+                                    "rea-link",
+                                    "rea_clickout",
                                 ),
                                 _listing_button(
                                     "View on domain.com.au",
                                     "https://www.domain.com.au/3-43-ocean-avenue-double-bay-nsw-2028-2020727766",
                                     "cta domain",
+                                    "domain-link",
+                                    "domain_clickout",
                                 ),
                             ],
                         ),
