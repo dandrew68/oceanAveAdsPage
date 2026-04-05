@@ -100,7 +100,10 @@ app.layout = html.Div(
                                 html.Li("King-sized main, 2nd bed with ensuite"),
                                 html.Li("New eat-in kitchen with a breakfast bar and ample cabinetry"),
                                 html.Li("Miele dishwasher and oven"),
-                                html.Li("Main bathroom with a bath, separate W.C., and laundry"),
+                                html.Li("Main bathroom with a bath, separate W.C., and internal laundry cupboard"),
+                                html.Li("Exclusive use of a very large laundry with 2 washers and 2 dryers one day per week"),
+                                html.Li("Elevator in building"),
+                                html.Li("Part ownership of a large store room"),
                                 html.Li("Good scramble parking (subject to House Rules)"),
                                 html.Li("200m walk to Double Bay village"),
                                 html.Li("Short walk to Edgecliff station"),
@@ -239,6 +242,55 @@ app.layout = html.Div(
                     className="stat highlight",
                     children=[
                         html.Span("Newly renovated", className="stat-text"),
+                    ],
+                ),
+            ],
+        ),
+        html.Div(
+            className="footer",
+            children=[
+                html.Div(
+                    className="footer-card",
+                    children=[
+                        html.H2("Owner & Contact"),
+                        html.P(
+                            "This website is operated by Auction Crowd Pty Ltd in connection with the marketing of "
+                            "3/43 Ocean Avenue, Double Bay.",
+                            className="footer-copy",
+                        ),
+                        html.P(
+                            [
+                                "General and privacy enquiries: ",
+                                html.A(
+                                    "auctioncrowd@gmail.com",
+                                    href="mailto:auctioncrowd@gmail.com",
+                                    className="footer-link",
+                                ),
+                            ],
+                            className="footer-copy",
+                        ),
+                    ],
+                ),
+                html.Div(
+                    className="footer-card",
+                    children=[
+                        html.H2("Privacy Policy"),
+                        html.P(
+                            "This site uses Google Analytics and Google Ads measurement tools to understand page visits, "
+                            "engagement and clicks through to the official realestate.com.au and domain.com.au listings.",
+                            className="footer-copy",
+                        ),
+                        html.P(
+                            "Those services may collect technical information such as your browser, device, IP address, "
+                            "approximate location, referring page, pages viewed and time on site. We use that information "
+                            "to understand campaign performance and improve this property page.",
+                            className="footer-copy",
+                        ),
+                        html.P(
+                            "This site does not include a contact form or direct checkout. If you email us, we will use "
+                            "your details only to respond to your enquiry. We do not sell personal information.",
+                            className="footer-copy",
+                        ),
                     ],
                 ),
             ],

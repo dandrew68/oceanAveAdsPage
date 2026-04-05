@@ -156,6 +156,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
   margin-top: 14px;
 }
 
@@ -167,6 +169,7 @@ body {
   border-radius: 999px;
   font-weight: 600;
   cursor: pointer;
+  flex: 0 0 auto;
 }
 
 .carousel-btn:hover {
@@ -176,6 +179,10 @@ body {
 .carousel-dots {
   display: flex;
   gap: 8px;
+  flex: 1 1 120px;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-width: 0;
 }
 
 .dot {
@@ -209,6 +216,22 @@ body {
 .footer-card h2 {
   font-family: "Fraunces", serif;
   margin: 0 0 10px;
+}
+
+.footer-copy {
+  margin: 0 0 12px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.footer-link {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
 }
 
 .stats-banner {
@@ -282,6 +305,16 @@ body {
 
   .carousel-controls {
     gap: 12px;
+    justify-content: center;
+  }
+
+  .carousel-dots {
+    order: 3;
+    width: 100%;
+  }
+
+  .carousel-btn {
+    padding: 8px 12px;
   }
 
   .stats-banner {
