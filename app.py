@@ -6,7 +6,35 @@ from dash import Dash, html
 from flask import send_from_directory
 
 
+GOOGLE_TAG_ID = "G-N3E492LY10"
+
 app = Dash(__name__, title="Ocean Avenue Double Bay", update_title=None)
+app.index_string = f"""
+<!DOCTYPE html>
+<html>
+    <head>
+        {{%metas%}}
+        <title>{{%title%}}</title>
+        {{%favicon%}}
+        <script async src="https://www.googletagmanager.com/gtag/js?id={GOOGLE_TAG_ID}"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){{dataLayer.push(arguments);}}
+          gtag('js', new Date());
+          gtag('config', '{GOOGLE_TAG_ID}');
+        </script>
+        {{%css%}}
+    </head>
+    <body>
+        {{%app_entry%}}
+        <footer>
+            {{%config%}}
+            {{%scripts%}}
+            {{%renderer%}}
+        </footer>
+    </body>
+</html>
+"""
 server = app.server
 photos_dir = Path(__file__).resolve().parent / "photos"
 
@@ -50,7 +78,7 @@ app.layout = html.Div(
                         html.Div("Apartment for Sale", className="pill"),
                         html.H1("3/43 Ocean Avenue, Double Bay"),
                         html.P(
-                            "A house-like Art Deco apartment in the boutique Jefferson building. This property delivers a rare blend "
+                            "A large Art Deco apartment in the tightly held Jefferson building. This property delivers a rare blend "
                             "of scale, privacy and refined contemporary style, in the most peaceful spot in Double Bay.",
                             className="lead",
                         ),
@@ -60,15 +88,14 @@ app.layout = html.Div(
                                 html.Li("Set 80m back from the street, surrounded by lush gardens"),
                                 html.Li("Newly renovated, soothing neutral tones"),
                                 html.Li("High ceilings, leafy greenery all around"),
-                                html.Li("3 large bedrooms with custom built-ins"),
+                                html.Li("3 large bedrooms with custom built-in wardrobes"),
                                 html.Li("King-sized main, 2nd bed with ensuite"),
-                                html.Li("Stylish eat-in kitchen with a breakfast bar"),
+                                html.Li("New eat-in kitchen with a breakfast bar and ample cabinetry"),
                                 html.Li("Miele dishwasher and oven"),
-                                html.Li("Main bathroom with a bath, separate W.C."),
+                                html.Li("Main bathroom with a bath, separate W.C., and laundry"),
                                 html.Li("Good scramble parking (subject to House Rules)"),
                                 html.Li("200m walk to Double Bay village"),
-                                html.Li("Stroll to the beach and Double Bay Public School"),
-                                html.Li("600m to the ferry or Edgecliff station"),
+                                html.Li("Short walk to Edgecliff station"),
                             ],
                         ),
                         html.Div(
