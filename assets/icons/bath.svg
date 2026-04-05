@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Bath icon">
-  <rect x="14" y="22" width="10" height="10" rx="3" fill="#0b5d5b"/>
-  <rect x="20" y="14" width="6" height="8" fill="#0b5d5b"/>
-  <rect x="10" y="32" width="44" height="12" rx="6" fill="#0b5d5b"/>
-  <rect x="14" y="44" width="4" height="8" fill="#0b5d5b"/>
-  <rect x="46" y="44" width="4" height="8" fill="#0b5d5b"/>
+  <path
+    d="M14 24h10v-6a6 6 0 0 1 12 0v2h-4v-2a2 2 0 0 0-4 0v6h22a4 4 0 0 1 4 4v6
+       a14 14 0 0 1-10 13.4V52h-4v-4h-16v4h-4v-4.6A14 14 0 0 1 10 34v-6a4 4 0 0 1 4-4zm0 4v6
+       a10 10 0 0 0 10 10h16a10 10 0 0 0 10-10v-6z"
+    fill="#0b5d5b"
+  />
 </svg>

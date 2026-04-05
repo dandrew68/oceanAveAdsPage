@@ -1,4 +1,7 @@
 (() => {
+  const AUTOPLAY_MS = 10000;
+  const USER_PAUSE_MS = 60000;
+
   const initCarousel = () => {
     const carousel = document.querySelector("[data-carousel]");
     if (!carousel || carousel.dataset.ready === "true") {
@@ -13,6 +16,8 @@
       return;
     }
     let index = 0;
+    let autoplayTimer;
+    let resumeTimer;
 
     const show = (nextIndex) => {
       images[index].classList.remove("is-active");
@@ -26,11 +31,37 @@
       }
     };
 
-    prevBtn?.addEventListener("click", () => show(index - 1));
-    nextBtn?.addEventListener("click", () => show(index + 1));
+    const startAutoplay = () => {
+      if (images.length < 2) {
+        return;
+      }
+      clearInterval(autoplayTimer);
+      autoplayTimer = window.setInterval(() => {
+        show(index + 1);
+      }, AUTOPLAY_MS);
+    };
+
+    const pauseAutoplayAfterManualControl = () => {
+      clearInterval(autoplayTimer);
+      clearTimeout(resumeTimer);
+      resumeTimer = window.setTimeout(() => {
+        startAutoplay();
+      }, USER_PAUSE_MS);
+    };
+
+    prevBtn?.addEventListener("click", () => {
+      show(index - 1);
+      pauseAutoplayAfterManualControl();
+    });
+    nextBtn?.addEventListener("click", () => {
+      show(index + 1);
+      pauseAutoplayAfterManualControl();
+    });
     dots.forEach((dot, dotIndex) => {
       dot.addEventListener("click", () => show(dotIndex));
     });
+
+    startAutoplay();
   };
 
   const observeReady = () => {

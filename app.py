@@ -50,13 +50,14 @@ app.layout = html.Div(
                         html.Div("Apartment for Sale", className="pill"),
                         html.H1("3/43 Ocean Avenue, Double Bay"),
                         html.P(
-                            "A house-like Art Deco apartment in the boutique Jefferson building delivers a rare blend "
+                            "A house-like Art Deco apartment in the boutique Jefferson building. This property delivers a rare blend "
                             "of scale, privacy and refined contemporary style, in the most peaceful spot in Double Bay.",
                             className="lead",
                         ),
                         html.Ul(
                             className="body-copy",
                             children=[
+                                html.Li("Set 80m back from the street, surrounded by lush gardens"),
                                 html.Li("Newly renovated, soothing neutral tones"),
                                 html.Li("High ceilings, leafy greenery all around"),
                                 html.Li("3 large bedrooms with custom built-ins"),
@@ -64,7 +65,7 @@ app.layout = html.Div(
                                 html.Li("Stylish eat-in kitchen with a breakfast bar"),
                                 html.Li("Miele dishwasher and oven"),
                                 html.Li("Main bathroom with a bath, separate W.C."),
-                                html.Li("Scramble parking (subject to House Rules)"),
+                                html.Li("Good scramble parking (subject to House Rules)"),
                                 html.Li("200m walk to Double Bay village"),
                                 html.Li("Stroll to the beach and Double Bay Public School"),
                                 html.Li("600m to the ferry or Edgecliff station"),
